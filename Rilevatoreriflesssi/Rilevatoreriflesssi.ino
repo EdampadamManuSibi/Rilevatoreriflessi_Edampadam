@@ -1,62 +1,76 @@
 #include <LiquidCrystal.h>
-LiquidCrystal (12,10,8,6,4,2)
+LiquidCrystal lcd(8,9,10,11,12,13);
 
-int suonobuzzer = 1;
-int bottone-reset = 3;
-int bottone-led = 5;
-int bottone-suono = 7;
-int rgbled = (9,11);
-int ledbianco = (13);
+int suonobuzzer = 4;
+int bottone_reset = 7;
+int bottone_led = 6;
+int bottone_suono = 5;
+int rgbledrosso = 2;
+int rgbledverde = 1;
+//int rgbledblu = 3;
+int ledgiallo = 3;
 
 void setup() {
   // put your setup code here, to run once:
-pinMode (ledbianco, OUTPUT);
+pinMode (ledgiallo, OUTPUT);
 pinMode (suonobuzzer, OUTPUT);
-pinMode (rgbled, OUTPUT);
-pinMode (bottone-reset, INPUT);
-pinMode (bottone-led, INPUT);
-pinMode (bottone-suono, INPUT);
+//pinMode (rgbled, OUTPUT);
+pinMode (bottone_reset, INPUT);
+pinMode (bottone_led, INPUT);
+pinMode (bottone_suono, INPUT);
 lcd.begin (16,2);
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-Comandobottoneled;   
-Comandobottonebuzer;
-Displaylcd;
-Buzzer-rgb;
+if (digitalRead(bottone_reset, HIGH){
+Comandobottoneled();   
+Comandobottonebuzzer();
+Buzzer_rgb();
+Displaylcd();  
 }
 
-void Comandobottoneled
-{
-while (ledbianco = HIGH)
-digitalWrite (bottone-led = HIGH)
-delay (random(1000,5000))
+
 }
 
-void Comandobottonebuzzer
+void Comandobottoneled()
 {
-while (suonobuzzer = HIGH)
-digitalWrite (bottone-suono = HIGH)
-delay (random(1000,5000))
+delay (random(1000,5000));
+digitalWrite (ledgiallo, HIGH);
+double tempoled = 0;
+while (digitalRead (bottone_led) ==LOW)
+{
+delay (10);
+tempoled = tempoled + 0,01;
+}
+ }
+
+void Comandobottonebuzzer()
+{
+delay (random(1000,5000));
+digitalWrite (suonobuzzer, HIGH);
+double temposuonobuzzer = 0;
+while (digitalRead (bottone_suono) ==LOW)
+{
+delay (10);
+temposuonobuzzer = temposuonobuzzer + 0,01;
+}
+ }
+
+void Buzzer_rgb()
+if 
+{
 }
 
-void Buzzer-rgb
+void Displaylcd()
 {
-while (suonobuzzer = HIGH)
-digitalWrite (rgbled = HIGH)
-delay (random(1000,5000))
-}
-
-void Displaylcd
-{
-Lcd.setCursor(0, 0);
-Lcd.print(“Test luce”); 
+lcd.setCursor(0, 0);
+lcd.print("Test con luce");
 delay (2000);
-Lcd.clear();
-Lcd.setCursor(0, 1);
-Lcd.print(“Test suono”);
+lcd.clear();
+lcd.setCursor(0, 1);
+lcd.print("Test con suono");
 delay (2000);
-Lcd.clear();  
+lcd.clear();  
 }
