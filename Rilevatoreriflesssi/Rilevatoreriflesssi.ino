@@ -7,14 +7,14 @@ int bottone_led = 6;
 int bottone_suono = 5;
 int rgbledrosso = 2;
 int rgbledverde = 1;
-//int rgbledblu = 3;
+
 int ledgiallo = 3;
 
 void setup() {
   // put your setup code here, to run once:
 pinMode (ledgiallo, OUTPUT);
 pinMode (suonobuzzer, OUTPUT);
-//pinMode (rgbled, OUTPUT);
+pinMode (rgbled, OUTPUT);
 pinMode (bottone_reset, INPUT);
 pinMode (bottone_led, INPUT);
 pinMode (bottone_suono, INPUT);
@@ -28,6 +28,7 @@ if (digitalRead(bottone_reset, HIGH){
 Comandobottoneled();   
 Comandobottonebuzzer();
 Buzzer_rgb();
+Led_rgb();
 Displaylcd();  
 }
 
@@ -59,8 +60,23 @@ temposuonobuzzer = temposuonobuzzer + 0,01;
  }
 
 void Buzzer_rgb()
-if 
+if (temposuonobuzzer < 200)
 {
+digitalWrite (rgbledverde, HIGH)
+}
+else if (temposuonobuzzer > 200)
+{
+digitalWrite (rgbledrosso, HIGH)
+}
+
+void Led_rgb()
+if (tempoled < 200)
+{
+digitalWrite (rgbledverde, HIGH)
+}
+else if (tempoled > 200)
+{
+digitalWrite (rgbledrosso, HIGH)
 }
 
 void Displaylcd()
