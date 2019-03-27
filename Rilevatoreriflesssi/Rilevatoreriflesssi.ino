@@ -7,14 +7,16 @@ int bottone_led = 6;
 int bottone_suono = 5;
 int rgbledrosso = 2;
 int rgbledverde = 1;
-
 int ledgiallo = 3;
+int temposuonobuzzer;
+int tempoled;
 
 void setup() {
   // put your setup code here, to run once:
 pinMode (ledgiallo, OUTPUT);
 pinMode (suonobuzzer, OUTPUT);
-pinMode (rgbled, OUTPUT);
+pinMode (rgbledrosso, OUTPUT);
+pinMode (rgbledverde, OUTPUT);
 pinMode (bottone_reset, INPUT);
 pinMode (bottone_led, INPUT);
 pinMode (bottone_suono, INPUT);
@@ -24,7 +26,8 @@ lcd.begin (16,2);
 
 void loop() {
   // put your main code here, to run repeatedly:
-if (digitalRead(bottone_reset, HIGH){
+if (digitalRead(bottone_reset)==HIGH)
+{
 Comandobottoneled();   
 Comandobottonebuzzer();
 Buzzer_rgb();
@@ -45,38 +48,45 @@ while (digitalRead (bottone_led) ==LOW)
 delay (10);
 tempoled = tempoled + 0,01;
 }
- }
+lcd.print(tempoled);
+}
 
 void Comandobottonebuzzer()
 {
 delay (random(1000,5000));
-digitalWrite (suonobuzzer, HIGH);
+tone(suonobuzzer,1000);
 double temposuonobuzzer = 0;
 while (digitalRead (bottone_suono) ==LOW)
 {
 delay (10);
 temposuonobuzzer = temposuonobuzzer + 0,01;
 }
- }
+lcd.print(temposuonobuzzer);
+noTone(suonobuzzer);
+}
 
 void Buzzer_rgb()
+{
 if (temposuonobuzzer < 200)
 {
-digitalWrite (rgbledverde, HIGH)
+digitalWrite (rgbledverde, HIGH);
 }
 else if (temposuonobuzzer > 200)
 {
-digitalWrite (rgbledrosso, HIGH)
+digitalWrite (rgbledrosso, HIGH);
+}
 }
 
 void Led_rgb()
+{
 if (tempoled < 200)
 {
-digitalWrite (rgbledverde, HIGH)
+digitalWrite (rgbledverde, HIGH);
 }
 else if (tempoled > 200)
 {
-digitalWrite (rgbledrosso, HIGH)
+digitalWrite (rgbledrosso, HIGH);
+}
 }
 
 void Displaylcd()
