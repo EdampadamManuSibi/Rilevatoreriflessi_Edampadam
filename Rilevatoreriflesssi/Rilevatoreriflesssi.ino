@@ -8,8 +8,8 @@ int bottone_suono = 7;
 int rgbledrosso = 3;
 int rgbledverde = 5;
 int ledgiallo = 1;
-int temposuonobuzzer;
-int tempoled;
+int tempoled = 0;
+int temposuonobuzzer = 0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -26,82 +26,60 @@ lcd.begin (16,2);
 
 void loop() {
   // put your main code here, to run repeatedly:
+digitalWrite (rgbledrosso, LOW); 
+digitalWrite (rgbledverde, LOW);
+lcd.clear();
 if (digitalRead(bottone_reset)==HIGH)
 {
-lcd.print("Test start");
-delay(2000);
-Displaylcd();
-Comandobottoneled(); 
-Displaylcd2();  
+lcd.setCursor(0, 0);
+lcd.print("Inizia Test");
+Comandobottoneled();   
 Comandobottonebuzzer();
-Buzzer_rgb();
-Led_rgb();
+Rgb();
+delay(5000);
 }
+
 
 }
 
-void Comandobottoneled()
+void Comandobottoneled()//metodo del bottone con l'accensione del led
 {
+tempoled = 0;
 delay (random(1000,5000));
 digitalWrite (ledgiallo, HIGH);
-double tempoled = 0;
 while (digitalRead (bottone_led) ==LOW)
 {
 delay (10);
-tempoled = tempoled + 0,01;
+tempoled = tempoled + 10;
 }
-lcd.print(tempoled);
+lcd.setCursor(0,0);
+lcd.print("Test luce:" + String(tempoled)+ "ms");
+digitalWrite (ledgiallo, LOW);
 }
 
-void Comandobottonebuzzer()
+void Comandobottonebuzzer()//metodo del bottone con il suono del buzzer
 {
+temposuonobuzzer = 0;
 delay (random(1000,5000));
-tone(suonobuzzer,500);
-double temposuonobuzzer = 0;
+tone(suonobuzzer,1000);
 while (digitalRead (bottone_suono) ==LOW)
 {
 delay (10);
-temposuonobuzzer = temposuonobuzzer + 0,01;
+temposuonobuzzer = temposuonobuzzer + 10;
 }
-lcd.print(temposuonobuzzer);
+lcd.setCursor(0,1);
+lcd.print ("Test suono:" + String(temposuonobuzzer) + "ms");
 noTone(suonobuzzer);
 }
 
-void Buzzer_rgb()
+void Rgb()//metodo per  l'rgb, fa cambiare il colore a seconda dei valori ottenuti
 {
-if (temposuonobuzzer < 300)
+if (tempoled > 300 || temposuonobuzzer > 300)
 {
-digitalWrite (rgbledverde, HIGH);
+digitalWrite(rgbledrosso, HIGH);
 }
-else if (temposuonobuzzer > 300)
+else
 {
-digitalWrite (rgbledrosso, HIGH);
+digitalWrite(rgbledverde, HIGH);
 }
-}
-
-void Led_rgb()
-{
-if (tempoled < 300)
-{
-digitalWrite (rgbledverde, HIGH);
-}
-else if (tempoled > 300)
-{
-digitalWrite (rgbledrosso, HIGH);
-}
-}
-
-void Displaylcd()
-{
-lcd.setCursor(0, 0);
-lcd.print("Test con luce");
-delay (2000);
-lcd.clear();
-}
-void Displaylcd2()
-{
-lcd.setCursor(0, 1);
-lcd.print("Test con suono");
-delay (2000);
-lcd.clear();  
 }
