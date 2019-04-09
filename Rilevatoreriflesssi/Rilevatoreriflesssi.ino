@@ -1,13 +1,13 @@
 #include <LiquidCrystal.h>
 LiquidCrystal lcd(8,9,10,11,12,13);
 
-int suonobuzzer = 2;
-int bottone_reset = 4;
-int bottone_led = 6;
-int bottone_suono = 7;
-int rgbledrosso = 3;
-int rgbledverde = 5;
-int ledgiallo = 1;
+int suonobuzzer =1;
+int bottone_reset = 2;
+int bottone_led = 3;
+int bottone_suono = 4;
+int rgbledrosso = 5;
+int rgbledverde = 6;
+int ledgiallo = 7;
 int tempoled = 0;
 int temposuonobuzzer = 0;
 
